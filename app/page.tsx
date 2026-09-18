@@ -28,6 +28,8 @@ import {
   VdCard,
   VdCardAction,
   VdCardDescription,
+  VdCardOverline,
+  VdCardTagline,
   VdCardFooter,
   VdCardHeader,
   VdCardTitle,
@@ -643,6 +645,47 @@ export default function Page() {
                             Title - H4<br></br>
                             Apsect Ratio - square for mobile, video for iPad and Desktop
                           </VdCardDescription>
+                        </VdCardHeader>
+                        <VdCardFooter>
+                          <Button className="w-full">View Event</Button>
+                        </VdCardFooter>
+                      </VdCard>
+                    </div>
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                      <VdCard className="relative pt-0">
+                        <div className="absolute inset-0 z-30 aspect-square md:aspect-video bg-black/35 " />
+                        <img
+                          src="https://avatar.vercel.sh/shadcn1"
+                          alt="Event cover"
+                          className="relative z-20 aspect-square md:aspect-video w-full object-cover "
+                        />
+                        <VdCardHeader>
+                        <VdCardOverline>
+                            Title - H4 | Overline | Responsive Image
+                          </VdCardOverline>
+                          <VdCardTitle as='h4'>H4 title, Responsive image</VdCardTitle>
+                        </VdCardHeader>
+                        <VdCardFooter>
+                          <Button className="w-full">View Event</Button>
+                        </VdCardFooter>
+                      </VdCard>
+                    </div>
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                      <VdCard className="relative pt-0">
+                        <div className="absolute inset-0 z-30 aspect-square md:aspect-video bg-black/35 " />
+                        <img
+                          src="https://avatar.vercel.sh/shadcn1"
+                          alt="Event cover"
+                          className="relative z-20 aspect-square md:aspect-video w-full object-cover "
+                        />
+                        <VdCardHeader>
+                          <VdCardOverline>
+                            Title - H4 | Overline | Responsive Image
+                          </VdCardOverline>
+                          <VdCardTitle as='h4'>H4 title, Responsive image</VdCardTitle>
+                          <VdCardTagline>
+                              Tagline...
+                            </VdCardTagline>
                         </VdCardHeader>
                         <VdCardFooter>
                           <Button className="w-full">View Event</Button>

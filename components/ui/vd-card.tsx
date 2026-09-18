@@ -35,9 +35,9 @@ function VdCard<T extends ElementType = "button">({
   );
 }
 
-function VdCardHeader({ className, ...props }: React.ComponentProps<"div">) {
+function VdCardHeader({ className, ...props }: React.ComponentProps<"hgroup">) {
   return (
-    <div
+    <hgroup
       data-slot="card-header"
       className={cn(
         "group/card-header @container/card-header grid auto-rows-min items-start gap-1 rounded-t-xl has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto]",
@@ -92,6 +92,26 @@ function VdCardDescription({ className, ...props }: React.ComponentProps<"div">)
   )
 }
 
+function VdCardOverline({ className, ...props }: React.ComponentProps<"span">) {
+  return (
+    <span
+      data-slot="card-overline"
+      className={cn("text-sm font-medium", className)}
+      {...props}
+    />
+  )
+}
+
+function VdCardTagline({ className, ...props }: React.ComponentProps<"p">) {
+  return (
+    <p
+      data-slot="card-tagline"
+      className={cn("text-base font-medium", className)}
+      {...props}
+    />
+  )
+}
+
 function VdCardAction({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -135,5 +155,7 @@ export {
   VdCardTitle,
   VdCardAction,
   VdCardDescription,
+  VdCardOverline,
+  VdCardTagline,
   VdCardContent,
 }
