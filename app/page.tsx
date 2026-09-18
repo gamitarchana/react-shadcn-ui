@@ -470,20 +470,19 @@ export default function Page() {
                   <div className="flex flex-wrap -m-4 xl: -m-5">
                     <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
                       <VdCard className="relative pt-0">
-                        <div className="absolute inset-0 z-30 aspect-video bg-black/35 " />
+                        <div className="absolute inset-0 z-30 aspect-square md:aspect-video bg-black/35 " />
                         <img
                           src="https://avatar.vercel.sh/shadcn1"
                           alt="Event cover"
-                          className="relative z-20 aspect-video w-full object-cover "
+                          className="relative z-20 aspect-square md:aspect-video w-full object-cover "
                         />
                         <VdCardHeader>
                           <VdCardAction>
                             <Badge variant="secondary">Featured</Badge>
                           </VdCardAction>
-                          <VdCardTitle>Design systems meetup</VdCardTitle>
+                          <VdCardTitle>Responsive image</VdCardTitle>
                           <VdCardDescription>
-                            A practical talk on component APIs, accessibility, and shipping
-                            faster.
+                            Apsect Ratio - square for mobile, video for iPad and Desktop
                           </VdCardDescription>
                         </VdCardHeader>
                         <VdCardFooter>
@@ -493,20 +492,19 @@ export default function Page() {
                     </div>
                     <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
                       <VdCard as="button" className="relative pt-0">
-                        <div className="absolute inset-0 z-30 aspect-video bg-black/35 " />
+                        <div className="absolute inset-0 z-30 aspect-square md:aspect-[4/3] bg-black/35 " />
                         <img
                           src="https://avatar.vercel.sh/shadcn1"
                           alt="Event cover"
-                          className="relative z-20 aspect-video w-full object-cover "
+                          className="relative z-20 aspect-square md:aspect-[4/3] w-full object-cover "
                         />
                         <VdCardHeader>
                           <VdCardAction>
                             <Badge variant="secondary">Featured</Badge>
                           </VdCardAction>
-                          <VdCardTitle>Design systems meetup</VdCardTitle>
+                          <VdCardTitle>Responsive image</VdCardTitle>
                           <VdCardDescription>
-                            A practical talk on component APIs, accessibility, and shipping
-                            faster.
+                            Apsect Ratio - square for mobile, 4/3 for iPad and Desktop
                           </VdCardDescription>
                         </VdCardHeader>
                         <VdCardFooter>
@@ -516,24 +514,138 @@ export default function Page() {
                     </div>
                     <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
                       <VdCard as={Link} href="/dashboard" className="relative pt-0">
-                        <div className="absolute inset-0 z-30 aspect-video bg-black/35 " />
+                        <div className="absolute inset-0 z-30 aspect-square md:aspect-[12/5] bg-black/35 " />
                         <img
                           src="https://avatar.vercel.sh/shadcn1"
                           alt="Event cover"
-                          className="relative z-20 aspect-video w-full object-cover "
+                          className="relative z-20 aspect-square md:aspect-[12/5] w-full object-cover "
                         />
                         <VdCardHeader>
                           <VdCardAction>
                             <Badge variant="secondary">Featured</Badge>
                           </VdCardAction>
-                          <VdCardTitle>Design systems meetup</VdCardTitle>
+                          <VdCardTitle>Responsive image</VdCardTitle>
                           <VdCardDescription>
-                            A practical talk on component APIs, accessibility, and shipping
-                            faster.
+                            Apsect Ratio - square for mobile, 12/5 for iPad and Desktop
                           </VdCardDescription>
                         </VdCardHeader>
                         <VdCardFooter>
                           <p>Link Component - Nested Button/Link not allowed</p>
+                        </VdCardFooter>
+                      </VdCard>
+                    </div>
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                      <VdCard className="relative pt-0">
+                        <div className="absolute inset-0 z-30 aspect-square md:aspect-video bg-black/35 " />
+                        <img
+                          src="https://avatar.vercel.sh/shadcn1"
+                          alt="Event cover"
+                          className="relative z-20 aspect-square md:aspect-video w-full object-cover "
+                        />
+                        <VdCardHeader>
+                          <VdCardAction>
+                            <Badge variant="secondary">Featured</Badge>
+                          </VdCardAction>
+                          <VdCardTitle>Default Div header, Responsive image</VdCardTitle>
+                          <VdCardDescription>
+                            Title - Default div
+                            Apsect Ratio - square for mobile, video for iPad and Desktop
+                          </VdCardDescription>
+                        </VdCardHeader>
+                        <VdCardFooter>
+                          <Button className="w-full">View Event</Button>
+                        </VdCardFooter>
+                      </VdCard>
+                    </div>
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                      <VdCard className="relative pt-0">
+                        <div className="absolute inset-0 z-30 aspect-square md:aspect-video bg-black/35 " />
+                        <img
+                          src="https://avatar.vercel.sh/shadcn1"
+                          alt="Event cover"
+                          className="relative z-20 aspect-square md:aspect-video w-full object-cover "
+                        />
+                        <VdCardHeader>
+                          <VdCardAction>
+                            <Badge variant="secondary">Featured</Badge>
+                          </VdCardAction>
+                          <VdCardTitle as='h1'>H1 title, Responsive image</VdCardTitle>
+                          <VdCardDescription>
+                            Title - H1<br></br>
+                            Apsect Ratio - square for mobile, video for iPad and Desktop
+                          </VdCardDescription>
+                        </VdCardHeader>
+                        <VdCardFooter>
+                          <Button className="w-full">View Event</Button>
+                        </VdCardFooter>
+                      </VdCard>
+                    </div>
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                      <VdCard className="relative pt-0">
+                        <div className="absolute inset-0 z-30 aspect-square md:aspect-video bg-black/35 " />
+                        <img
+                          src="https://avatar.vercel.sh/shadcn1"
+                          alt="Event cover"
+                          className="relative z-20 aspect-square md:aspect-video w-full object-cover "
+                        />
+                        <VdCardHeader>
+                          <VdCardAction>
+                            <Badge variant="secondary">Featured</Badge>
+                          </VdCardAction>
+                          <VdCardTitle as='h2'>H2 title, Responsive image</VdCardTitle>
+                          <VdCardDescription>
+                            Title - H2<br></br>
+                            Apsect Ratio - square for mobile, video for iPad and Desktop
+                          </VdCardDescription>
+                        </VdCardHeader>
+                        <VdCardFooter>
+                          <Button className="w-full">View Event</Button>
+                        </VdCardFooter>
+                      </VdCard>
+                    </div>
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                      <VdCard className="relative pt-0">
+                        <div className="absolute inset-0 z-30 aspect-square md:aspect-video bg-black/35 " />
+                        <img
+                          src="https://avatar.vercel.sh/shadcn1"
+                          alt="Event cover"
+                          className="relative z-20 aspect-square md:aspect-video w-full object-cover "
+                        />
+                        <VdCardHeader>
+                          <VdCardAction>
+                            <Badge variant="secondary">Featured</Badge>
+                          </VdCardAction>
+                          <VdCardTitle as='h3'>H3 title, Responsive image</VdCardTitle>
+                          <VdCardDescription>
+                            Title - H3<br></br>
+                            Apsect Ratio - square for mobile, video for iPad and Desktop
+                          </VdCardDescription>
+                        </VdCardHeader>
+                        <VdCardFooter>
+                          <Button className="w-full">View Event</Button>
+                        </VdCardFooter>
+                      </VdCard>
+                    </div>
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                      <VdCard className="relative pt-0">
+                        <div className="absolute inset-0 z-30 aspect-square md:aspect-video bg-black/35 " />
+                        <img
+                          src="https://avatar.vercel.sh/shadcn1"
+                          alt="Event cover"
+                          className="relative z-20 aspect-square md:aspect-video w-full object-cover "
+                        />
+                        <VdCardHeader>
+                          <VdCardAction>
+                            <Badge variant="secondary">Featured</Badge>
+                          </VdCardAction>
+                          <VdCardTitle as='h4'>H4 title, Responsive image</VdCardTitle>
+                          <VdCardDescription>
+                            Title - H4<br></br>
+                            Apsect Ratio - square for mobile, video for iPad and Desktop
+                          </VdCardDescription>
+                        </VdCardHeader>
+                        <VdCardFooter>
+                          <Button className="w-full">View Event</Button>
                         </VdCardFooter>
                       </VdCard>
                     </div>

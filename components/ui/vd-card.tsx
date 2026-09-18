@@ -1,4 +1,5 @@
 import React, { ComponentPropsWithoutRef, ElementType, ReactNode } from "react";
+import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "cn"
 
 // 1. Define the props that our button always accepts
@@ -47,12 +48,33 @@ function VdCardHeader({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-function VdCardTitle({ className, ...props }: React.ComponentProps<"div">) {
+const VdCardTitleVariants= cva(
+  "--font-sans",
+  {
+    variants: {
+      as: {
+        h1: "text-4xl lg:text-5xl",
+        h2: "text-3xl lg:text-4xl",
+        h3: "text-2xl lg:text-3xl",
+        h4: "text-xl lg:text-2xl",
+        h5: "text-lg lg:text-xl",
+        h6: "font-semibold",
+        div: "text-base font-medium",
+      },
+    },
+    defaultVariants: {
+      as: "div",
+    },
+  }
+)
+
+function VdCardTitle({ as, className, ...props }: React.ComponentProps<"div"> & {as? : 'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'} ) {
+  const Component = as || "div";
   return (
-    <div
+    <Component
       data-slot="card-title"
-      className={cn(
-        "font-heading text-base leading-normal font-medium group-data-[size=sm]/card:text-sm",
+      className={cn(VdCardTitleVariants({ as, className }),
+        "leading-normal",
         className
       )}
       {...props}
