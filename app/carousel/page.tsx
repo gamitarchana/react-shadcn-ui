@@ -1,6 +1,8 @@
 "use client"
 import * as React from "react"
 
+import Link from "next/link"
+
 import { Card, CardContent } from "@/components/ui/card"
 import {
   Carousel,
@@ -12,6 +14,15 @@ import {
 } from "@/components/ui/carousel"
 import Autoplay from "embla-carousel-autoplay"
 import { Heading } from "@/components/ui/heading"
+
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
+  } from "@/components/ui/breadcrumb"
 
 export default function CarouselPage() {
     const [api, setApi] = React.useState<CarouselApi>()
@@ -61,6 +72,21 @@ export default function CarouselPage() {
         </div>
         <div className="flex min-h-svh p-6 w-full ">
             <div className="w-full">
+                <Breadcrumb>
+                    <BreadcrumbList>
+                        <BreadcrumbItem>
+                            <BreadcrumbLink render={<Link href="/">Home</Link>} />
+                        </BreadcrumbItem>
+                        <BreadcrumbSeparator />
+                        <BreadcrumbItem>
+                            <BreadcrumbLink render={<Link href="/card">Components</Link>} />
+                        </BreadcrumbItem>
+                        <BreadcrumbSeparator />
+                        <BreadcrumbItem>
+                            <BreadcrumbPage>Carousel</BreadcrumbPage>
+                        </BreadcrumbItem>
+                    </BreadcrumbList>
+                </Breadcrumb>
                 <h1 className="scroll-m-20 text-4xl tracking-tight lg:text-5xl font-heading">Carousels</h1>
                 <div className="w-full">
                     <div className="py-8">
