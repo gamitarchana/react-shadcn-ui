@@ -5,10 +5,10 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "cn"
 
 interface HeadingProps extends React.HTMLAttributes<HTMLDivElement> {
-    title: string
-    component: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
-    variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
-  }
+  title: string
+  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+  variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+}
 
 const headingVariants = cva(
   "font-heading",
@@ -29,19 +29,20 @@ const headingVariants = cva(
   }
 )
 
+
 function Heading({
     title, 
-    component,
+    as = "h2",
     className,
     variant = "h2",
     ...props
 }: HeadingProps) {
-    const HeadingComp = component; //variant
+    const Component = as; //variant
   return (
-    <HeadingComp
+    <Component
       className={cn(headingVariants({ variant, className }))}
       {...props}
-    >{title}</HeadingComp>
+    >{title}</Component>
   )
 }
 

@@ -1,9 +1,46 @@
+"use client"
 import { Button } from "@/components/ui/button"
 import { Heading } from "@/components/ui/heading"
 import { Mail } from "lucide-react"
 import { NewWindow } from "@/components/icons/new-window"
 
+import Link from "next/link"
+import { buttonVariants } from "@/components/ui/button"
+
+import {
+  Card,
+  CardAction,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+
+import {
+	MyCard,
+	MyCardDescription,
+	MyCardFooter,
+	MyCardHeader,
+	MyCardTitle,
+  } from "@/components/ui/my-card"
+
+import {
+  VdCard,
+  VdCardAction,
+  VdCardDescription,
+  VdCardFooter,
+  VdCardHeader,
+  VdCardTitle,
+} from "@/components/ui/vd-card"
+
+import { Badge } from "@/components/ui/badge"
+
 export default function Page() {
+  const myCardClikHandler = () => {
+    console.log("MyCard Clicked");
+  }
+
+
   return (
     <div className="flex min-h-svh p-6">
       <div className="flex min-w-0 flex-col gap-4 text-sm leading-loose">
@@ -12,12 +49,13 @@ export default function Page() {
           <div className="py-8">  
             <h2 className="scroll-m-20 text-3xl tracking-tight lg:text-4xl font-heading">Typography</h2> 
             <div className="py-4">        
-              <Heading component="h1" variant="h1" title="Custom Heading H1"/>
-              <Heading component="h2" variant="h2" title="Custom Heading H2"/>
-              <Heading component="h3" variant="h3" title="Custom Heading H3"/>
-              <Heading component="h4" variant="h4" title="Custom Heading H4"/>
-              <Heading component="h5" variant="h5" title="Custom Heading H5"/>
-              <Heading component="h6" variant="h6" title="Custom Heading H6"/>
+              <Heading as="h1" variant="h1" title="Custom Heading H1"/>
+              <Heading as="h2" variant="h2" title="Custom Heading H2"/>
+              <Heading as="h3" variant="h3" title="Custom Heading H3"/>
+              <Heading as="h4" variant="h4" title="Custom Heading H4"/>
+              <Heading as="h5" variant="h5" title="Custom Heading H5"/>
+              <Heading as="h6" variant="h6" title="Custom Heading H6"/>
+			        <Heading variant="h2" title="Custom Default Heading H2"/>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
             </div>
           </div>
@@ -175,6 +213,333 @@ export default function Page() {
                   <NewWindow  />
                 </Button> 
               </div>
+              <div className="py-8"> 
+                <h2 className="scroll-m-20 text-3xl tracking-tight lg:text-4xl font-heading">Buttons Link</h2>
+                <div className="py-2">
+                  <div className="py-2">
+                    <Link href="/dashboard" className={buttonVariants({ variant: "default", size: "xs" })}>
+                      Primary XS Button Link
+                    </Link>      
+                    <Link href="/dashboard" className={buttonVariants({ variant: "default", size: "sm" })}>
+                      Primary SM Button Link
+                    </Link>
+                    <Link href="/dashboard" className={buttonVariants({ variant: "default" })}>
+                      Primary Default Button Link
+                    </Link>
+                    <Link href="/dashboard" className={buttonVariants({ variant: "default", size: "lg" })}>
+                      Primary LG Button Link
+                    </Link>    
+                  </div>
+                  <div className="py-2">
+                    <Link href="/dashboard" className={buttonVariants({ variant: "default", size: "xs" })}>
+                      <NewWindow  /> Primary XS Button Link
+                    </Link>      
+                    <Link href="/dashboard" className={buttonVariants({ variant: "default", size: "sm" })}>
+                      <NewWindow  />  Primary SM Button Link
+                    </Link>
+                    <Link href="/dashboard" className={buttonVariants({ variant: "default" })}>
+                      <NewWindow  /> Primary Default Button Link
+                    </Link>
+                    <Link href="/dashboard" className={buttonVariants({ variant: "default", size: "lg" })}>
+                      <NewWindow  /> Primary LG Button Link
+                    </Link> 
+                  </div>
+                  <div className="py-2">
+                    <Link href="/dashboard" className={buttonVariants({ variant: "default", size: "xs" })}>
+                      Primary XS Button Link <NewWindow  />
+                    </Link>      
+                    <Link href="/dashboard" className={buttonVariants({ variant: "default", size: "sm" })}>
+                      Primary SM Button Link <NewWindow  /> 
+                    </Link>
+                    <Link href="/dashboard" className={buttonVariants({ variant: "default" })}>
+                      Primary Default Button Link <NewWindow  />
+                    </Link>
+                    <Link href="/dashboard" className={buttonVariants({ variant: "default", size: "lg" })}>
+                      Primary LG Button Link <NewWindow  />
+                    </Link> 
+                  </div>
+                </div>
+              </div>
+              <div className="py-8">  
+                <h2 className="scroll-m-20 text-3xl tracking-tight lg:text-4xl font-heading">Cards - Default Shadcn Componet, Custom styling</h2> 
+                <div className="py-4"> 
+                  <div className="flex flex-wrap -m-4 xl: -m-5">
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                      <Card className="relative pt-0">
+                        <div className="absolute inset-0 z-30 aspect-video bg-black/35 " />
+                        <img
+                          src="https://avatar.vercel.sh/shadcn1"
+                          alt="Event cover"
+                          className="relative z-20 aspect-video w-full object-cover "
+                        />
+                        <CardHeader>
+                          <CardAction>
+                            <Badge variant="secondary">Featured</Badge>
+                          </CardAction>
+                          <CardTitle>Design systems meetup</CardTitle>
+                          <CardDescription>
+                            A practical talk on component APIs, accessibility, and shipping
+                            faster.
+                          </CardDescription>
+                        </CardHeader>
+                        <CardFooter>
+                          <Button className="w-full">View Event</Button>
+                        </CardFooter>
+                      </Card>
+                    </div>
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                                <Card className="relative pt-0">
+                                  <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
+                                  <img
+                                    src="https://avatar.vercel.sh/shadcn1"
+                                    alt="Event cover"
+                                    className="relative z-20 aspect-video w-full object-cover "
+                                  />
+                                  <CardHeader>
+                                    <CardAction>
+                                      <Badge variant="secondary">Featured</Badge>
+                                    </CardAction>
+                                    <CardTitle>Design systems meetup</CardTitle>
+                                    <CardDescription>
+                                      A practical talk on component APIs, accessibility, and shipping
+                                      faster.
+                                    </CardDescription>
+                                  </CardHeader>
+                                  <CardFooter>
+                                    <Button className="w-full">View Event</Button>
+                                  </CardFooter>
+                                </Card>
+                              </div>
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                                <Card className="relative pt-0">
+                                  <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
+                                  <img
+                                    src="https://avatar.vercel.sh/shadcn1"
+                                    alt="Event cover"
+                                    className="relative z-20 aspect-video w-full object-cover "
+                                  />
+                                  <CardHeader>
+                                    <CardAction>
+                                      <Badge variant="secondary">Featured</Badge>
+                                    </CardAction>
+                                    <CardTitle>Design systems meetup</CardTitle>
+                                    <CardDescription>
+                                      A practical talk on component APIs, accessibility, and shipping
+                                      faster.
+                                    </CardDescription>
+                                  </CardHeader>
+                                  <CardFooter>
+                                    <Button className="w-full">View Event</Button>
+                                  </CardFooter>
+                                </Card>
+                              </div>
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                                <Card className="relative pt-0">
+                                  <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
+                                  <img
+                                    src="https://avatar.vercel.sh/shadcn1"
+                                    alt="Event cover"
+                                    className="relative z-20 aspect-video w-full object-cover "
+                                  />
+                                  <CardHeader>
+                                    <CardAction>
+                                      <Badge variant="secondary">Featured</Badge>
+                                    </CardAction>
+                                    <CardTitle>Design systems meetup</CardTitle>
+                                    <CardDescription>
+                                      A practical talk on component APIs, accessibility, and shipping
+                                      faster.
+                                    </CardDescription>
+                                  </CardHeader>
+                                  <CardFooter>
+                                    <Button className="w-full">View Event</Button>
+                                  </CardFooter>
+                                </Card>
+                              </div>
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                      <Card className="relative pt-0">
+                        <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
+                        <img
+                          src="https://avatar.vercel.sh/shadcn1"
+                          alt="Event cover"
+                          className="relative z-20 aspect-video w-full object-cover "
+                        />
+                        <CardHeader>
+                          <CardAction>
+                            <Badge variant="secondary">Featured</Badge>
+                          </CardAction>
+                          <CardTitle>Design systems meetup</CardTitle>
+                          <CardDescription>
+                            A practical talk on component APIs, accessibility, and shipping
+                            faster.
+                          </CardDescription>
+                        </CardHeader>
+                        <CardFooter>
+                          <Button className="w-full">View Event</Button>
+                        </CardFooter>
+                      </Card>
+                    </div>
+                  </div>
+                </div>
+              </div>
+			        <div className="py-8">  
+                <h2 className="scroll-m-20 text-3xl tracking-tight lg:text-4xl font-heading">My Cards - Custom - BUTTON, LINK</h2> 
+                <div className="py-4"> 
+                  <div className="flex flex-wrap -m-4 xl: -m-5">
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                      <MyCard className="relative pt-0 border-0" onClick={myCardClikHandler}>
+                        <div className="absolute inset-0 z-30 aspect-video bg-black/35 rounded-lg" />
+                        <img
+                          src="https://avatar.vercel.sh/shadcn1"
+                          alt="Event cover"
+                          className="relative z-20 aspect-video w-full object-cover rounded-lg"
+                        />
+                        <MyCardHeader className="border-0">
+                          <MyCardTitle>Design systems meetup</MyCardTitle>
+                        </MyCardHeader>
+                        <MyCardFooter>
+                        </MyCardFooter>
+                      </MyCard>
+                    </div>
+					          <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                      <MyCard className="relative pt-0">
+                        <div className="absolute inset-0 z-30 aspect-video bg-black/35 rounded-lg" />
+                        <img
+                          src="https://avatar.vercel.sh/shadcn1"
+                          alt="Event cover"
+                          className="relative z-20 aspect-video w-full object-cover rounded-lg"
+                        />
+                        <MyCardHeader>
+                          <MyCardTitle>Design systems meetup</MyCardTitle>
+                        </MyCardHeader>
+                        <MyCardFooter>
+                        </MyCardFooter>
+                      </MyCard>
+                    </div>
+					          <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                      <MyCard className="relative pt-0">
+                        <div className="absolute inset-0 z-30 aspect-video bg-black/35 rounded-lg" />
+                        <img
+                          src="https://avatar.vercel.sh/shadcn1"
+                          alt="Event cover"
+                          className="relative z-20 aspect-video w-full object-cover rounded-lg"
+                        />
+                        <MyCardHeader>
+                          <MyCardTitle>Design systems meetup</MyCardTitle>
+                        </MyCardHeader>
+                        <MyCardFooter>
+                        </MyCardFooter>
+                      </MyCard>
+                    </div>
+					          <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                      <MyCard className="relative pt-0">
+                        <div className="absolute inset-0 z-30 aspect-video bg-black/35 rounded-lg" />
+                        <img
+                          src="https://avatar.vercel.sh/shadcn1"
+                          alt="Event cover"
+                          className="relative z-20 aspect-video w-full object-cover rounded-lg"
+                        />
+                        <MyCardHeader>
+                          <MyCardTitle>Design systems meetup</MyCardTitle>
+                        </MyCardHeader>
+                        <MyCardFooter>
+                        </MyCardFooter>
+                      </MyCard>
+                    </div>
+					          <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                      <MyCard className="relative pt-0" as={Link} href="\dashboard">
+                        <div className="absolute inset-0 z-30 aspect-video bg-black/35 rounded-lg" />
+                        <img
+                          src="https://avatar.vercel.sh/shadcn1"
+                          alt="Event cover"
+                          className="relative z-20 aspect-video w-full object-cover rounded-lg"
+                        />
+                        <MyCardHeader>
+                          <MyCardTitle>Design systems meetup</MyCardTitle>
+                        </MyCardHeader>
+                        <MyCardFooter>
+                        </MyCardFooter>
+                      </MyCard>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="py-8">  
+                <h2 className="scroll-m-20 text-3xl tracking-tight lg:text-4xl font-heading">Vd Cards - Custom - DIV, BUTTON, LINK</h2> 
+                <div className="py-4"> 
+                  <div className="flex flex-wrap -m-4 xl: -m-5">
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                      <VdCard className="relative pt-0">
+                        <div className="absolute inset-0 z-30 aspect-video bg-black/35 " />
+                        <img
+                          src="https://avatar.vercel.sh/shadcn1"
+                          alt="Event cover"
+                          className="relative z-20 aspect-video w-full object-cover "
+                        />
+                        <VdCardHeader>
+                          <VdCardAction>
+                            <Badge variant="secondary">Featured</Badge>
+                          </VdCardAction>
+                          <VdCardTitle>Design systems meetup</VdCardTitle>
+                          <VdCardDescription>
+                            A practical talk on component APIs, accessibility, and shipping
+                            faster.
+                          </VdCardDescription>
+                        </VdCardHeader>
+                        <VdCardFooter>
+                          <Button className="w-full">View Event</Button>
+                        </VdCardFooter>
+                      </VdCard>
+                    </div>
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                      <VdCard as="button" className="relative pt-0">
+                        <div className="absolute inset-0 z-30 aspect-video bg-black/35 " />
+                        <img
+                          src="https://avatar.vercel.sh/shadcn1"
+                          alt="Event cover"
+                          className="relative z-20 aspect-video w-full object-cover "
+                        />
+                        <VdCardHeader>
+                          <VdCardAction>
+                            <Badge variant="secondary">Featured</Badge>
+                          </VdCardAction>
+                          <VdCardTitle>Design systems meetup</VdCardTitle>
+                          <VdCardDescription>
+                            A practical talk on component APIs, accessibility, and shipping
+                            faster.
+                          </VdCardDescription>
+                        </VdCardHeader>
+                        <VdCardFooter>
+                          <p>Button Component - Nested Button/Link not allowed</p>
+                        </VdCardFooter>
+                      </VdCard>
+                    </div>
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                      <VdCard as={Link} href="/dashboard" className="relative pt-0">
+                        <div className="absolute inset-0 z-30 aspect-video bg-black/35 " />
+                        <img
+                          src="https://avatar.vercel.sh/shadcn1"
+                          alt="Event cover"
+                          className="relative z-20 aspect-video w-full object-cover "
+                        />
+                        <VdCardHeader>
+                          <VdCardAction>
+                            <Badge variant="secondary">Featured</Badge>
+                          </VdCardAction>
+                          <VdCardTitle>Design systems meetup</VdCardTitle>
+                          <VdCardDescription>
+                            A practical talk on component APIs, accessibility, and shipping
+                            faster.
+                          </VdCardDescription>
+                        </VdCardHeader>
+                        <VdCardFooter>
+                          <p>Link Component - Nested Button/Link not allowed</p>
+                        </VdCardFooter>
+                      </VdCard>
+                    </div>
+                    </div>
+                  </div>
+                </div>
             </div>
           </div>
         </div>
