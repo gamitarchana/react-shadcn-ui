@@ -29,6 +29,10 @@ export default function CarouselPage() {
     const [current, setCurrent] = React.useState(0)
     const [count, setCount] = React.useState(0)
 
+    const [apiT, setApiT] = React.useState<CarouselApi>()
+    const [currentT, setCurrentT] = React.useState(0)
+    const [countT, setCountT] = React.useState(0)
+
     React.useEffect(() => {
         if (!api) {
           return
@@ -41,6 +45,19 @@ export default function CarouselPage() {
           setCurrent(api.selectedScrollSnap() + 1)
         })
       }, [api])
+
+      React.useEffect(() => {
+        if (!apiT) {
+          return
+        }
+    
+        setCountT(apiT.scrollSnapList().length)
+        setCurrentT(apiT.selectedScrollSnap() + 1)
+    
+        apiT.on("select", () => {
+          setCurrentT(apiT.selectedScrollSnap() + 1)
+        })
+      }, [apiT])
 
 
     return (
@@ -144,6 +161,48 @@ export default function CarouselPage() {
                             />
                             ))}
                             </div>*/}
+                        </div>
+                    </div>
+                    <div className="py-8">
+                        <Heading as="h2" variant="h2" title="Carousel-Single item on mobile, 2 in ipad, 3 in desktop with Thumbnails" className="pb-4"/>
+                        <div className="px-10">
+                        <Carousel className="w-full" setApi={setApiT}>
+                        <CarouselContent>
+                            {Array.from({ length: 5 }).map((_, index) => (
+                            <CarouselItem className="sm:basis-1/2 md:basis-1/3" key={index}>
+                                <div className="p-1">
+                                <Card className="p-0 relative">
+                                    <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
+                                    <img
+                                        src="https://avatar.vercel.sh/shadcn1"
+                                        alt="Event cover"
+                                        className="relative z-20 aspect-video w-full object-cover "
+                                    />
+                                </Card>
+                                </div>
+                            </CarouselItem>
+                            ))}
+                        </CarouselContent>
+                        <CarouselPrevious />
+                        <CarouselNext />
+                        </Carousel>
+                        {/* Pagination Thumbnails */}
+                        <div className="flex justify-center gap-2 py-4">
+                            {Array.from({ length: countT }).map((_, index) => (
+                            <button
+                                key={index}
+                                onClick={() => apiT?.scrollTo(index)}
+                                className={`h-8 md:h-12 w-8 md:w-12 rounded-md transition-colors rounded-sm ${
+                                currentT === index + 1 ? "opacity-100" : "opacity-50"
+                                }`}
+                                aria-label={`Go to slide ${index + 1}`}
+                            ><img
+                            src="https://avatar.vercel.sh/shadcn1"
+                            alt="Event cover"
+                            className="relative z-20 aspect-square w-full object-cover rounded-sm "
+                        /></button>
+                            ))}
+                        </div>
                         </div>
                     </div>
                     <div className="py-8">
