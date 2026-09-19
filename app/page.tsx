@@ -1,12 +1,18 @@
 "use client"
+import * as React from "react"
 import { Button } from "@/components/ui/button"
 import { Heading } from "@/components/ui/heading"
 import { Mail } from "lucide-react"
 import { NewWindow } from "@/components/icons/new-window"
 import Link from "next/link"
 import { buttonVariants } from "@/components/ui/button"
+import { BookmarkIcon } from "lucide-react"
+import { Toggle } from "@/components/ui/toggle"
+import { MyToggle } from "@/components/ui/my-toggle"
 
 export default function Page() {
+  const [isToggled, setIsToggled] = React.useState(false);
+  
   return (
     <div className="flex min-h-svh p-6">
       <div className="flex min-w-0 flex-col gap-4 text-sm leading-loose">
@@ -226,6 +232,72 @@ export default function Page() {
                   </div>
                 </div>
               </div>
+              </div>
+              <div className="py-8">  
+                <h2 className="scroll-m-20 text-3xl tracking-tight lg:text-4xl font-heading">Toggle</h2>
+                <div className="py-2">
+                  <Toggle aria-label="Toggle bookmark" size="sm" variant="outline">
+                    <BookmarkIcon className="group-aria-pressed/toggle:fill-foreground" />
+                    Bookmark
+                  </Toggle>
+                </div>
+                <div className="py-2">
+                  <Toggle aria-label="Toggle bookmark" size="sm" variant="outline">
+                    <BookmarkIcon className="group-aria-pressed/toggle:fill-foreground" />
+                  </Toggle>
+                </div>
+                <div className="py-8">  
+                  <h2 className="scroll-m-20 text-3xl tracking-tight lg:text-4xl font-heading">My Toggle</h2>
+                    <div className="py-2">
+                      <MyToggle aria-label="Toggle bookmark" size="sm" variant="primary">
+                        <BookmarkIcon className="group-aria-pressed/toggle:fill-primary-foreground" />
+                        Bookmark
+                      </MyToggle>
+                    </div>
+                    <div className="py-2">
+                      <MyToggle aria-label="Toggle bookmark" size="sm" variant="primary_outline">
+                        <BookmarkIcon className="group-aria-pressed/toggle:fill-primary" />
+                        Bookmark
+                      </MyToggle>
+                    </div>
+                    <div className="py-2">
+                      <MyToggle aria-label="Toggle bookmark" size="icon-xs" variant="primary">
+                        <BookmarkIcon className="group-aria-pressed/toggle:fill-primary-foreground" />
+                      </MyToggle>
+                    </div>
+                    <div className="py-2">
+                      <MyToggle aria-label="Toggle bookmark" size="icon-sm" variant="primary">
+                        <BookmarkIcon className="group-aria-pressed/toggle:fill-primary-foreground" />
+                      </MyToggle>
+                    </div>
+                    <div className="py-2">
+                      <MyToggle aria-label="Toggle bookmark" size="icon" variant="primary">
+                        <BookmarkIcon className="group-aria-pressed/toggle:fill-primary-foreground" />
+                      </MyToggle>
+                    </div>
+                    <div className="py-2">
+                      <MyToggle aria-label="Toggle bookmark" size="icon-lg" variant="primary">
+                        <BookmarkIcon className="group-aria-pressed/toggle:fill-primary-foreground" />
+                      </MyToggle>
+                    </div>
+                    <div className="py-2">
+                      <MyToggle aria-label="Toggle bookmark" size="icon" variant="primary_outline">
+                        <BookmarkIcon className="group-aria-pressed/toggle:fill-primary" />
+                      </MyToggle>
+                    </div>
+                    <div className="py-2">
+                      <MyToggle 
+                        aria-label="Toggle bookmark" size="icon" variant="primary"
+                        pressed={isToggled}
+                        onPressedChange={setIsToggled}>
+                        {isToggled ? (
+                          <BookmarkIcon />
+                        ) : (
+                          <Mail className="h-4 w-4" />
+                        )}
+                      </MyToggle>
+                    </div>
+                  </div>
               </div>
           </div>
         </div>
