@@ -2,6 +2,7 @@ import { Quando, Reddit_Sans, Geist_Mono } from 'next/font/google'
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { TooltipProvider } from "@/components/ui/tooltip"
 import { cn } from "@/lib/utils";
 
 const quando = Quando({
@@ -34,7 +35,9 @@ export default function RootLayout({
       className={cn("antialiased", fontMono.variable, "font-sans", reddit_sans.variable, quando.variable)}
     >
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <TooltipProvider>{children}</TooltipProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
