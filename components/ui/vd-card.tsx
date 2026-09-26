@@ -27,7 +27,7 @@ function VdCard<T extends ElementType = "button">({
       data-slot="card"
       data-size={size}
       className={cn(
-        "w-full border-0 text-left group/card flex flex-col gap-(--card-spacing) overflow-hidden rounded-xl bg-card py-(--card-spacing) text-sm text-card-foreground [--card-spacing:--spacing(6)] has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:--spacing(4)] *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl",
+        "w-full border-0 text-left group/card flex flex-col gap-(--card-spacing) overflow-hidden no-underline rounded-xl bg-card py-(--card-spacing) text-sm text-card-foreground [--card-spacing:--spacing(6)] has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:--spacing(4)] *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl",
         className
       )}
       {...props}
@@ -49,17 +49,17 @@ function VdCardHeader({ className, ...props }: React.ComponentProps<"hgroup">) {
 }
 
 const VdCardTitleVariants= cva(
-  "--font-sans",
+  "--font-sans m-0",
   {
     variants: {
       as: {
-        h1: "text-4xl lg:text-5xl",
-        h2: "text-3xl lg:text-4xl",
-        h3: "text-2xl lg:text-3xl",
-        h4: "text-xl lg:text-2xl",
-        h5: "text-lg lg:text-xl",
-        h6: "font-semibold",
-        div: "text-base font-medium",
+        h1: "text-4xl lg:text-5xl leading-tight",
+        h2: "text-3xl lg:text-4xl leading-tight",
+        h3: "text-2xl lg:text-3xl leading-snug",
+        h4: "text-xl lg:text-2xl leading-snug",
+        h5: "text-lg lg:text-xl leading-normal",
+        h6: "font-semibold leading-normal",
+        div: "text-base font-medium leading-normal",
       },
     },
     defaultVariants: {
@@ -74,7 +74,6 @@ function VdCardTitle({ as, className, ...props }: React.ComponentProps<"div"> & 
     <Component
       data-slot="card-title"
       className={cn(VdCardTitleVariants({ as, className }),
-        "leading-normal",
         className
       )}
       {...props}

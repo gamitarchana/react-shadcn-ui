@@ -15,12 +15,12 @@ export default function Page() {
   
   return (
     <div className="flex min-h-svh p-6">
-      <div className="flex min-w-0 flex-col gap-4 text-sm leading-loose">
-        <h1 className="scroll-m-20 text-4xl tracking-tight lg:text-5xl font-heading">shadcn ui</h1>
+      <div className="flex min-w-0 flex-col leading-loose">
+        <h1 className="scroll-m-20 ">shadcn ui</h1>
         <div>
           <div className="py-8">  
             <h2 className="scroll-m-20 text-3xl tracking-tight lg:text-4xl font-heading">Typography</h2> 
-            <div className="py-4">        
+            <div className="">        
               <Heading as="h1" variant="h1" title="Custom Heading H1"/>
               <Heading as="h2" variant="h2" title="Custom Heading H2"/>
               <Heading as="h3" variant="h3" title="Custom Heading H3"/>
@@ -28,12 +28,19 @@ export default function Page() {
               <Heading as="h5" variant="h5" title="Custom Heading H5"/>
               <Heading as="h6" variant="h6" title="Custom Heading H6"/>
 			        <Heading variant="h2" title="Custom Default Heading H2"/>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Test link: <a href="https://www.google.com" target="_blank">Test Link</a></p>
+              <ul>
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+                <li>Item 4</li>
+              </ul>
             </div>
           </div>
+          <hr/>
           <div className="py-8">  
             <h2 className="scroll-m-20 text-3xl tracking-tight lg:text-4xl font-heading">Buttons</h2>
-            <div className="py-2">
+            <div className="">
               <div className="py-2">
                 <Button variant='default' size='xs'>Primary XS</Button>   
                 <Button variant='default' size='sm'>Primary SM</Button>         
@@ -187,7 +194,7 @@ export default function Page() {
               </div>
               <div className="py-8"> 
                 <h2 className="scroll-m-20 text-3xl tracking-tight lg:text-4xl font-heading">Buttons Link</h2>
-                <div className="py-2">
+                <div className="">
                   <div className="py-2">
                     <Link href="/dashboard" className={buttonVariants({ variant: "default", size: "xs" })}>
                       Primary XS Button Link
@@ -248,7 +255,7 @@ export default function Page() {
                 </div>
                 <div className="py-8">  
                   <h2 className="scroll-m-20 text-3xl tracking-tight lg:text-4xl font-heading">My Toggle</h2>
-                    <div className="py-2">
+                    <div className="">
                       <MyToggle aria-label="Toggle bookmark" size="sm" variant="primary">
                         <BookmarkIcon className="group-aria-pressed/toggle:fill-primary-foreground" />
                         Bookmark

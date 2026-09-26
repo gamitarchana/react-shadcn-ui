@@ -15,12 +15,12 @@ const headingVariants = cva(
   {
     variants: {
       variant: {
-        h1: "text-4xl lg:text-5xl",
-        h2: "text-3xl lg:text-4xl",
-        h3: "text-2xl lg:text-3xl",
-        h4: "text-xl lg:text-2xl",
-        h5: "text-lg lg:text-xl",
-        h6: "font-semibold",
+        h1: "text-4xl lg:text-5xl leading-tight",
+        h2: "text-3xl lg:text-4xl leading-tight",
+        h3: "text-2xl lg:text-3xl leading-snug",
+        h4: "text-xl lg:text-2xl leading-snug",
+        h5: "text-lg lg:text-xl leading-normal",
+        h6: "font-semibold leading-normal",
       },
     },
     defaultVariants: {

@@ -36,7 +36,7 @@ export default function RootLayout({
     >
       <body>
         <ThemeProvider>
-          <TooltipProvider>{children}</TooltipProvider>
+          <TooltipProvider><div className="typeset">{children}</div></TooltipProvider>
         </ThemeProvider>
       </body>
     </html>

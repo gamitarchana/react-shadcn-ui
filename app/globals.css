@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "./typeset.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -168,15 +169,12 @@
     @apply border-border outline-ring/50;
     }
   body {
-    @apply bg-background text-foreground text-base lg:text-lg;
+    @apply bg-background text-foreground;/* text-base lg:text-lg*/
     }
   button:not(:disabled), [role="button"]:not(:disabled) {
     cursor: pointer;
     }
   html {
     @apply font-sans text-base lg:text-lg;
-    }
-  p {
-    @apply text-base lg:text-lg;
     }
 }
