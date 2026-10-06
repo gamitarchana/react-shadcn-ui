@@ -13,7 +13,10 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel"
 import Autoplay from "embla-carousel-autoplay"
+import Fade from "embla-carousel-fade"
 import { Heading } from "@/components/ui/heading"
+
+import { StackCarousel, StackCarouselContent, StackCarouselItem } from "@/components/ui/stack-carousel"
 
 import {
     Breadcrumb,
@@ -166,7 +169,11 @@ export default function CarouselPage() {
                     <div className="py-8">
                         <Heading as="h2" variant="h2" title="Carousel-Single item on mobile, 2 in ipad, 3 in desktop with Thumbnails" className="pb-4"/>
                         <div className="px-10">
-                        <Carousel className="w-full" setApi={setApiT}>
+                        <Carousel className="w-full" setApi={setApiT} plugins={[
+                            Autoplay({
+                                delay: 2000,
+                            }),
+                            ]}>
                         <CarouselContent>
                             {Array.from({ length: 5 }).map((_, index) => (
                             <CarouselItem className="sm:basis-1/2 md:basis-1/3" key={index}>
@@ -260,6 +267,58 @@ export default function CarouselPage() {
                         <CarouselPrevious />
                         <CarouselNext />
                         </Carousel>
+                        </div>
+                    </div>
+                    <div className="py-8">
+                        <Heading as="h2" variant="h2" title="Full width Carousel with fade effect" className="pb-4"/>
+                        <div className="px-10">
+                        <Carousel className="w-full" 
+                            opts={{
+                                loop: true,
+                                duration: 60
+                            }}
+                            plugins={[
+                            Autoplay({
+                                delay: 2000,
+                            }),
+                            Fade(),
+                            ]}>
+                        <CarouselContent>
+                            {Array.from({ length: 5 }).map((_, index) => (
+                            <CarouselItem key={index}>
+                                <div className="p-1">
+                                <Card className="p-0">
+                                    <CardContent className="flex aspect-[12/5] items-center justify-center p-6">
+                                        <span className="text-4xl font-semibold">{index + 1}</span>
+                                    </CardContent>
+                                </Card>
+                                </div>
+                            </CarouselItem>
+                            ))}
+                        </CarouselContent>
+                        <CarouselPrevious />
+                        <CarouselNext />
+                        </Carousel>
+                        </div>
+                    </div>
+                    <div className="py-8">
+                        <Heading as="h2" variant="h2" title="Stack Carousel" className="pb-4"/>
+                        <div className="px-10">
+                        <StackCarousel className="w-full" autoPlay={true}>
+                            <StackCarouselContent>
+                                {Array.from({ length: 5 }).map((_, index) => (
+                                <StackCarouselItem key={index} className="bg-primary odd:bg-gray-100">
+                                    <div className="p-1">
+                                    <Card className="p-0">
+                                        <CardContent className="flex aspect-[12/5] items-center justify-center p-6">
+                                            <span className="text-4xl font-semibold">{index + 1}</span>
+                                        </CardContent>
+                                    </Card>
+                                    </div>
+                                </StackCarouselItem>
+                                ))}
+                            </StackCarouselContent>
+                        </StackCarousel>
                         </div>
                     </div>
                 </div>
