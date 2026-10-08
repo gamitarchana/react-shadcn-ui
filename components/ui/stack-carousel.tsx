@@ -24,11 +24,13 @@ type StackCarouselContextProps = {
   easing?: string,
   onSelect: (slide: number) => void,
   scrollNext: () => void,
+  scrollPrev: () => void,
   activeSlide: number,
   prevSlide: number,
   setSlidesCount: (count: number) => void,
   setIsScrolling: (flag: boolean) => void,
   resetCarousel: () => void,
+  isForward: boolean,
 } & StackCarouselProps
 
 const StackCarouselContext = React.createContext<StackCarouselContextProps | null>(null)
@@ -58,34 +60,38 @@ function StackCarousel({
 	const [activeSlide, setActiveSlide] = useState(0);
 	const [prevSlide, setPrevSlide] = useState(0);
 	const [isSliding, setIsSliding] = useState(false);
-    const [isPaused, setIsPaused] = useState(false);
+	const [isForward, setIsForward] = useState(true);
+    //const [isPaused, setIsPaused] = useState(false);
 	//const [isNext, setIsNext] = useState(false);//useState(0);
 	//const [nextSlide, setNextSlide] = useState(0);
 
 	const onSelect = React.useCallback((slide: number) => {
 		if (isSliding)
 			return;
-		console.log("onSelect " + slide);
+		//console.log("onSelect " + slide);
 		setActiveSlide(slide);
-	}, [isSliding])
+	}, [isSliding]);
+
 	const scrollNext = React.useCallback(() => {
 		if (isSliding)
 			return;
-		console.log("scrollNext --" + activeSlide);
-		//setIsNext(Math.random());
-		//setNextSlide((activeSlide + 1));
+		//console.log("scrollNext --" + activeSlide);
 		setPrevSlide(activeSlide);
+		setIsForward(true);
 		setActiveSlide((prev) => (prev + 1) % count);
-		/*if (isNext == 0){
-			setIsNext(1);
-			console.log("scrollNext - 1");}
-		else{
-			setIsNext(0);
-			console.log("scrollNext - 0");}*/
+	}, [activeSlide, count, isSliding]);
+
+	const scrollPrev = React.useCallback(() => {
+		if (isSliding)
+			return;
+		//console.log("scrollNext --" + activeSlide);
+		setPrevSlide(activeSlide);
+		setIsForward(false);
+		setActiveSlide((prev) => ( prev > 0 ? (prev-1) : (count-1)));
 	}, [activeSlide, count, isSliding])
 
 	const setIsScrolling = React.useCallback((flag: boolean) => {
-		console.log("setIsScrolling " + flag);
+		//console.log("setIsScrolling " + flag);
 		setIsSliding(flag);
 	}, [])
 
@@ -110,7 +116,9 @@ function StackCarousel({
 		easing: easing,
 		setSlidesCount: (count:number) => setSlidesCount(count),
 		onSelect: (slide:number) => onSelect(slide),
+		isForward: isForward,
 		scrollNext: scrollNext,
+		scrollPrev: scrollPrev,
 		activeSlide: activeSlide,
 		prevSlide: prevSlide,
 		setIsScrolling: (flag:boolean) => setIsScrolling(flag),
@@ -134,16 +142,23 @@ function StackCarousel({
 function StackCarouselContent({ className, ...props }: React.ComponentProps<"div">) {
 	const contentRef = useRef<HTMLDivElement>(null);
 
-	const { delay, duration, autoPlay, easing, setSlidesCount, setIsScrolling, activeSlide, prevSlide, scrollNext, resetCarousel } = useStackCarousel();
-	//const pContext = use(StackCarouselContext);//useStackCarousel();
-	//pContext.
-
-	//const [prevIndex, setPrevIndex] = useState(0);
-	//const [activeIndex, setActiveIndex] = useState(0);
-	const [totalItems, setTotalItems] = useState(0);
-	//const [isSliding, setIsSliding] = useState(false);
+	const { 
+		delay,
+		duration,
+		autoPlay,
+		easing,
+		setSlidesCount,
+		setIsScrolling,
+		isForward,
+		activeSlide,
+		prevSlide,
+		scrollNext,
+		resetCarousel 
+	} = useStackCarousel();
+	
+	//const [totalItems, setTotalItems] = useState(0);
 	const [isInit, setIsInit] = useState(true);
-	// const [isPaused, setIsPaused] = useState(false);
+
 
 
 	const slideNext = useEffectEvent(() => {
@@ -168,13 +183,28 @@ function StackCarouselContent({ className, ...props }: React.ComponentProps<"div
 	const handleTransitionEnd = useEffectEvent(() => {
 
 		if (!contentRef.current) 
-		return;
+			return;
 		const items = contentRef.current.querySelectorAll('[data-slot="carousel-item"]');
-
+		
 		const prevItem = items[prevSlide] as HTMLElement;
-		if(prevItem) {
-			prevItem.style.transform =`translate3d(${contentRef.current.offsetWidth}px, 0, 0)`;
+		const activeItem = items[activeSlide] as HTMLElement;
+		if(isForward){
+			if(prevItem) {
+				prevItem.style.transform =`translate3d(${contentRef.current.offsetWidth}px, 0, 0)`;
+			}
+		} else {
+			if(activeItem) {
+				activeItem.style.zIndex =`1`;
+			}
+			if(prevItem) {
+				if(prevSlide != 0)
+					prevItem.style.zIndex =`unset`;
+			//if(prevSlide == 1 && items[0] instanceof HTMLElement)
+				//items[0].style.zIndex =`unset`;
+			}
+			
 		}
+		
 		setIsScrolling(false);
 	  });
 
@@ -184,7 +214,7 @@ function StackCarouselContent({ className, ...props }: React.ComponentProps<"div
 
 		const items = contentRef.current.querySelectorAll('[data-slot="carousel-item"]');
 		if( null != items && items.length > 1 ) {
-			setTotalItems(items.length);
+			//setTotalItems(items.length);
 			setSlidesCount(items.length);
 		}
 		
@@ -207,8 +237,8 @@ function StackCarouselContent({ className, ...props }: React.ComponentProps<"div
 	useEffect(() => {
 		if (!contentRef.current) 
 			return;
-		console.log("nextSlide - "+ activeSlide);
-		console.log("prevSlide - "+ prevSlide);
+		console.log("nextSlide - " + isForward + ' - '+ activeSlide);
+		console.log("prevSlide - " + isForward + ' - '+ prevSlide);
 		//onSelect(activeIndex);
 		//if (isSliding)
 			//return;
@@ -217,21 +247,29 @@ function StackCarouselContent({ className, ...props }: React.ComponentProps<"div
 		if( null != items && items.length > 1 ) {
 			if(  items[activeSlide] instanceof HTMLElement) {
 				//const x = 0 - (activeIndex * contentRef.current.offsetWidth);
-				const x = 0 - (contentRef.current.offsetWidth);
-				//items[activeIndex].style.transform =`translate3d(${x}px, 0, 0)`;
-				items[activeSlide].style.transform =`none`;
-				items[activeSlide].style.zIndex =`1`;
-				//items[activeIndex].style.transition =`transform 1000ms ease-in-out`;
-				items[activeSlide].style.transition =`transform ${duration}ms ${easing}`;
-				// 2. Attach the listener using the native DOM event name 'transitionend'
-				items[activeSlide].addEventListener('transitionend', handleTransitionEnd);
-				//	setIsSliding(true);
-				if(isInit){
-					setIsInit(false);
-				} else {
-					setIsScrolling(true);
-				}
-				console.log("--useEffect activeslide--");
+				//if(isForward) {
+					const x = 0 - (contentRef.current.offsetWidth);
+					//items[activeIndex].style.transform =`translate3d(${x}px, 0, 0)`;
+					items[activeSlide].style.transform =`none`;
+					if(isForward) {
+						items[activeSlide].style.zIndex =`1`;
+						//items[activeIndex].style.transition =`transform 1000ms ease-in-out`;
+						items[activeSlide].style.transition =`transform ${duration}ms ${easing}`;
+						// 2. Attach the listener using the native DOM event name 'transitionend'
+						items[activeSlide].addEventListener('transitionend', handleTransitionEnd);
+						//	setIsSliding(true);
+					} else {
+						//items[activeSlide].style.zIndex =`0`;
+						//items[activeIndex].style.transition =`transform 1000ms ease-in-out`;
+						items[activeSlide].style.transition =`unset`;
+					}
+					if(isInit){
+						setIsInit(false);
+					} else {
+						setIsScrolling(true);
+					}
+					console.log("--useEffect activeslide--");
+				//}
 			}
 		}
 		return () => {
@@ -242,7 +280,7 @@ function StackCarouselContent({ className, ...props }: React.ComponentProps<"div
 			}
 		  };
 		
-    }, [activeSlide]);
+    }, [activeSlide, isForward]);
 
 	useEffect(() => {
 		if (!contentRef.current) 
@@ -251,14 +289,33 @@ function StackCarouselContent({ className, ...props }: React.ComponentProps<"div
 		const items = contentRef.current.querySelectorAll('[data-slot="carousel-item"]');
 		if( null != items && items.length > 1 ) {
 			if( items[prevSlide] instanceof HTMLElement) {
-				if(prevSlide != 0)
-					items[prevSlide].style.zIndex =`unset`;
-				if(prevSlide == 1 && items[0] instanceof HTMLElement)
-					items[0].style.zIndex =`unset`;
+				if(isForward) {
+					if(prevSlide != 0)
+						items[prevSlide].style.zIndex =`unset`;
+					if(prevSlide == 1 && items[0] instanceof HTMLElement)
+						items[0].style.zIndex =`unset`;
+				} else {
+					//const items = contentRef.current.querySelectorAll('[data-slot="carousel-item"]');
+
+					//const prevItem = items[prevSlide] as HTMLElement;
+					//if(prevItem) {
+						items[prevSlide].style.transform =`translate3d(${contentRef.current.offsetWidth}px, 0, 0)`;
+						items[prevSlide].style.transition =`transform ${duration}ms ${easing}`;
+						// 2. Attach the listener using the native DOM event name 'transitionend'
+						items[prevSlide].addEventListener('transitionend', handleTransitionEnd);
+					//}
+				}
 			}
 		}
+		return () => {
+			if( null != items && items.length > 1 ) {
+				if(  items[prevSlide] instanceof HTMLElement) {
+					items[prevSlide].removeEventListener('transitionend', handleTransitionEnd);
+				}
+			}
+		};
 		
-    }, [prevSlide]);
+    }, [prevSlide, isForward]);
 
 
 	useWorkerInterval(
@@ -336,13 +393,13 @@ function StackCarouselItem({ className, ...props }: React.ComponentProps<"div">)
     )
   }
 
-  /*function StackCarouselPrevious({
+  function StackCarouselPrevious({
 	className,
 	variant = "outline",
 	size = "icon-sm",
 	...props
   }: React.ComponentProps<typeof Button>) {
-	const { scrollPrev, canScrollPrev } = useStackCarousel()
+	const { scrollPrev } = useStackCarousel();
   
 	return (
 	  <Button
@@ -350,13 +407,11 @@ function StackCarouselItem({ className, ...props }: React.ComponentProps<"div">)
 		variant={variant}
 		size={size}
 		className={cn(
-		  "absolute touch-manipulation rounded-full",
-		  orientation === "horizontal"
-			? "inset-y-0 -left-12 my-auto"
-			: "-top-12 left-1/2 -translate-x-1/2 rotate-90",
+		  	"absolute touch-manipulation rounded-full",
+			"inset-y-0 -left-12 my-auto",
 		  className
 		)}
-		disabled={!canScrollPrev}
+		disabled={false}
 		onClick={scrollPrev}
 		{...props}
 	  >
@@ -364,7 +419,7 @@ function StackCarouselItem({ className, ...props }: React.ComponentProps<"div">)
 		<span className="sr-only">Previous slide</span>
 	  </Button>
 	)
-  }*/
+  }
   
   function StackCarouselNext({
 	className,
@@ -372,7 +427,7 @@ function StackCarouselItem({ className, ...props }: React.ComponentProps<"div">)
 	size = "icon-sm",
 	...props
   }: React.ComponentProps<typeof Button>) {
-	const { scrollNext } = useStackCarousel()
+	const { scrollNext } = useStackCarousel();
   
 	return (
 	  <Button
@@ -399,5 +454,5 @@ export {
   StackCarouselContent,
   StackCarouselItem,
   StackCarouselNext,
-  //StackCarouselPrevious
+  StackCarouselPrevious
 }

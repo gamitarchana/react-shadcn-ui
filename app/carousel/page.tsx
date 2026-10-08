@@ -20,7 +20,9 @@ import {
     StackCarousel,
     StackCarouselContent,
     StackCarouselItem,
-    StackCarouselNext } from "@/components/ui/stack-carousel"
+    StackCarouselNext,
+    StackCarouselPrevious
+} from "@/components/ui/stack-carousel"
 
 import {
     Breadcrumb,
@@ -308,7 +310,7 @@ export default function CarouselPage() {
                     <div className="py-8">
                         <Heading as="h2" variant="h2" title="Stack Carousel" className="pb-4"/>
                         <div className="px-10">
-                        <StackCarousel className="w-full" autoPlay={true} delay={5000} duration={1000}>
+                        <StackCarousel className="w-full" autoPlay={false} delay={5000} duration={1000}>
                             <StackCarouselContent>
                                 {Array.from({ length: 5 }).map((_, index) => (
                                 <StackCarouselItem key={index} className="bg-primary odd:bg-gray-100">
@@ -322,6 +324,7 @@ export default function CarouselPage() {
                                 </StackCarouselItem>
                                 ))}
                             </StackCarouselContent>
+                            <StackCarouselPrevious/>
                             <StackCarouselNext/>
                         </StackCarousel>
                         </div>
