@@ -19,9 +19,11 @@ import { Heading } from "@/components/ui/heading"
 import { 
     StackCarousel,
     StackCarouselContent,
+    StackCarouselList,
     StackCarouselItem,
     StackCarouselNext,
-    StackCarouselPrevious
+    StackCarouselPrevious,
+    StackCarouselDots
 } from "@/components/ui/stack-carousel"
 
 import {
@@ -40,7 +42,7 @@ export default function CarouselPage() {
 
     const [apiT, setApiT] = React.useState<CarouselApi>()
     const [currentT, setCurrentT] = React.useState(0)
-    const [countT, setCountT] = React.useState(0)
+    const [countT, setCountT] = React.useState(0);
 
     React.useEffect(() => {
         if (!api) {
@@ -310,23 +312,51 @@ export default function CarouselPage() {
                     <div className="py-8">
                         <Heading as="h2" variant="h2" title="Stack Carousel" className="pb-4"/>
                         <div className="px-10">
-                        <StackCarousel className="w-full" autoPlay={false} delay={5000} duration={1000}>
-                            <StackCarouselContent>
-                                {Array.from({ length: 5 }).map((_, index) => (
-                                <StackCarouselItem key={index} className="bg-primary odd:bg-gray-100">
-                                    <div className="p-1">
-                                    <Card className="p-0">
-                                        <CardContent className="flex aspect-[12/5] items-center justify-center p-6">
-                                            <span className="text-4xl font-semibold">{index + 1}</span>
-                                        </CardContent>
-                                    </Card>
-                                    </div>
-                                </StackCarouselItem>
-                                ))}
-                            </StackCarouselContent>
-                            <StackCarouselPrevious/>
-                            <StackCarouselNext/>
-                        </StackCarousel>
+                            <StackCarousel className="w-full" autoPlay={true} delay={5000} duration={1000}>
+                                <StackCarouselContent>
+                                    <StackCarouselList>
+                                        {Array.from({ length: 5 }).map((_, index) => (
+                                        <StackCarouselItem key={index} className="bg-primary odd:bg-gray-100">
+                                            <div className="p-1">
+                                            <Card className="p-0">
+                                                <CardContent className="flex aspect-[12/5] items-center justify-center p-6">
+                                                    <span className="text-4xl font-semibold">{index + 1}</span>
+                                                </CardContent>
+                                            </Card>
+                                            </div>
+                                        </StackCarouselItem>
+                                        ))}
+                                    </StackCarouselList>
+                                    <StackCarouselPrevious/>
+                                    <StackCarouselNext/>
+                                </StackCarouselContent>
+                                <StackCarouselDots/>
+                            </StackCarousel>
+                        </div>
+                    </div>
+                    <div className="py-8">
+                        <Heading as="h2" variant="h2" title="Stack Carousel with Thumbnails" className="pb-4"/>
+                        <div className="px-10">
+                            <StackCarousel className="w-full" autoPlay={true} delay={3000} duration={500}>
+                                <StackCarouselContent>
+                                    <StackCarouselList>
+                                        {Array.from({ length: 5 }).map((_, index) => (
+                                        <StackCarouselItem key={index} className="bg-primary odd:bg-gray-100">
+                                            <div className="p-1">
+                                            <Card className="p-0">
+                                                <CardContent className="flex aspect-[12/5] items-center justify-center p-6">
+                                                    <span className="text-4xl font-semibold">{index + 1}</span>
+                                                </CardContent>
+                                            </Card>
+                                            </div>
+                                        </StackCarouselItem>
+                                        ))}
+                                    </StackCarouselList>
+                                    <StackCarouselPrevious/>
+                                    <StackCarouselNext/>
+                                </StackCarouselContent>
+                                 <StackCarouselDots dots={["https://avatar.vercel.sh/shadcn1", "https://avatar.vercel.sh/shadcn1", "https://avatar.vercel.sh/shadcn1", "https://avatar.vercel.sh/shadcn1", "https://avatar.vercel.sh/shadcn1"]}/>
+                            </StackCarousel>
                         </div>
                     </div>
                 </div>
