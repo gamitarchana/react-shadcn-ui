@@ -312,7 +312,7 @@ export default function CarouselPage() {
                     <div className="py-8">
                         <Heading as="h2" variant="h2" title="Stack Carousel" className="pb-4"/>
                         <div className="px-10">
-                            <StackCarousel className="w-full" autoPlay={true} delay={5000} duration={1000}>
+                            <StackCarousel className="w-full" autoPlay={true} delay={5000} duration={2000}>
                                 <StackCarouselContent>
                                     <StackCarouselList>
                                         {Array.from({ length: 5 }).map((_, index) => (
@@ -334,7 +334,7 @@ export default function CarouselPage() {
                             </StackCarousel>
                         </div>
                     </div>
-                    <div className="py-8">
+                   {/* <div className="py-8">
                         <Heading as="h2" variant="h2" title="Stack Carousel with Thumbnails" className="pb-4"/>
                         <div className="px-10">
                             <StackCarousel className="w-full" autoPlay={true} delay={3000} duration={500}>
@@ -358,7 +358,7 @@ export default function CarouselPage() {
                                  <StackCarouselDots dots={["https://avatar.vercel.sh/shadcn1", "https://avatar.vercel.sh/shadcn1", "https://avatar.vercel.sh/shadcn1", "https://avatar.vercel.sh/shadcn1", "https://avatar.vercel.sh/shadcn1"]}/>
                             </StackCarousel>
                         </div>
-                    </div>
+                                        </div>*/}
                 </div>
             </div>
         </div>

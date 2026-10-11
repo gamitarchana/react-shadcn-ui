@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { useState, useEffect, useRef, useLayoutEffect, useEffectEvent, useImperativeHandle  } from "react";
+import { useState, useEffect, useRef, useLayoutEffect, useEffectEvent  } from "react";
 import { cn } from "cn"
 
 import { useWorkerInterval } from "@/hooks/useWorkerInterval";
@@ -48,13 +48,13 @@ function useStackCarousel() {
 
 function StackCarousel({
 	ref,
-  className,
-  children,
-  autoPlay = true, 
-  duration = 1000,
-  delay = 2000,
-  easing = 'ease-in-out',
-  ...props
+	className,
+	children,
+	autoPlay = true, 
+	duration = 1000,
+	delay = 2000,
+	easing = 'ease-in-out',
+	...props
 }: React.ComponentProps<"div"> & StackCarouselProps) {
 
 	const carouselRef = useRef(null)
@@ -66,9 +66,45 @@ function StackCarousel({
 	const [isSliding, setIsSliding] = useState(false);
 	const [isForward, setIsForward] = useState(true);
     const [isReset, setIsReset] = useState(false);
+	const [isAutoplay, setIsAutoplay] = useState(autoPlay);
 	//const [isPaused, setIsPaused] = useState(false);
 	//const [isNext, setIsNext] = useState(false);//useState(0);
 	//const [nextSlide, setNextSlide] = useState(0);
+
+	const setSlidesCount = React.useCallback((count: number) => {
+		console.log("setSlidesCount " + count);
+		setCount(count);
+	}, []);
+	
+	useEffect(() => {
+		if(isReset) {
+			setIsSliding(false);
+			setIsForward(true);
+		}
+    }, [isReset]);
+
+	useEffect(() => {
+		resetCarousel();
+		if(count < 2) {
+			setIsAutoplay(false);
+		} else {
+			setIsAutoplay(autoPlay);
+		}
+    }, [count]);
+
+	const setIsScrolling = React.useCallback((flag: boolean) => {
+		//console.log("setIsScrolling " + flag);
+		setIsSliding(flag);
+	}, [])
+
+
+	const resetCarousel = useEffectEvent(() => {
+		console.log("----resetCarousel-----");
+		setPrevSlide(count-1);
+		setActiveSlide(0);
+		setIsReset(true);
+	});
+
 
 	const scrollToSlide = React.useCallback((slide: number) => {
 		if (isSliding)
@@ -102,35 +138,12 @@ function StackCarousel({
 		setActiveSlide((prev) => ( prev > 0 ? (prev-1) : (count-1)));
 	}, [activeSlide, count, isSliding])
 
-	const setIsScrolling = React.useCallback((flag: boolean) => {
-		//console.log("setIsScrolling " + flag);
-		setIsSliding(flag);
-	}, [])
 
-
-	const setSlidesCount = React.useCallback((count: number) => {
-		console.log("setSlidesCount " + count);
-		setCount(count);
-	}, []);
-
-	const resetCarousel = useEffectEvent(() => {
-		console.log("----resetCarousel-----");
-		setPrevSlide(count-1);
-		setActiveSlide(0);
-		setIsReset(true);
-	});
-
-	useEffect(() => {
-		if(isReset) {
-			setIsSliding(false);
-			setIsForward(true);
-		}
-    }, [isReset]);
 
   return (
     <StackCarouselContext.Provider
       value={{
-        autoPlay: autoPlay,
+        autoPlay: isAutoplay,
         duration: duration,
         delay: delay,
 		easing: easing,
@@ -168,13 +181,16 @@ function StackCarouselContent({ className, ...props }: React.ComponentProps<"div
 				"relative",
 				className
 				)}
-				{...props}
-		/>
+			>
+			<div
+			className="overflow-hidden"
+			{...props} />
+		</div>
 	)
 }
 
-function StackCarouselList({ className, ...props }: React.ComponentProps<"div">) {
-	const contentRef = useRef<HTMLDivElement>(null);
+function StackCarouselList({ children, className, ...props }: React.ComponentProps<"div">) {
+	const carouselListRef = useRef<HTMLDivElement>(null);
 
 	const { 
 		delay,
@@ -193,6 +209,12 @@ function StackCarouselList({ className, ...props }: React.ComponentProps<"div">)
 	//const [totalItems, setTotalItems] = useState(0);
 	const [isInit, setIsInit] = useState(true);
 
+	/*useEffect(() => {
+		console.log('The number of children changed!');
+		console.log("-----------------Children count - " + React.Children.count(children));
+		setSlidesCount(React.Children.count(children));
+		// Handle layout adjustments or updates here
+	  }, [React.Children.count(children)]); */
 
 
 	const slideNext = useEffectEvent(() => {
@@ -216,15 +238,15 @@ function StackCarouselList({ className, ...props }: React.ComponentProps<"div">)
 
 	const handleTransitionEnd = useEffectEvent(() => {
 
-		if (!contentRef.current) 
+		if (!carouselListRef.current) 
 			return;
-		const items = contentRef.current.querySelectorAll('[data-slot="carousel-item"]');
+		const items = carouselListRef.current.children;//querySelectorAll('[data-slot="carousel-item"]');
 		
 		const prevItem = items[prevSlide] as HTMLElement;
 		const activeItem = items[activeSlide] as HTMLElement;
 		if(isForward){
 			if(prevItem) {
-				prevItem.style.transform =`translate3d(${contentRef.current.offsetWidth}px, 0, 0)`;
+				prevItem.style.transform =`translate3d(${carouselListRef.current.offsetWidth}px, 0, 0)`;
 			}
 		} else {
 			if(activeItem) {
@@ -242,17 +264,17 @@ function StackCarouselList({ className, ...props }: React.ComponentProps<"div">)
 		setIsScrolling(false);
 	  });
 
-	useEffect(() => {
-		if (!contentRef.current) 
+	/*useEffect(() => {
+		if (!carouselListRef.current) 
 		return;
 
-		const items = contentRef.current.querySelectorAll('[data-slot="carousel-item"]');
+		const items = carouselListRef.current.children;//querySelectorAll('[data-slot="carousel-item"]');
 		if( null != items && items.length > 1 ) {
 			//setTotalItems(items.length);
 			setSlidesCount(items.length);
 		}
 		
-    }, []);
+    }, []);*/
 
 	/*useEffect(() => {
 		console.log("isNext --" + nextSlide);
@@ -269,17 +291,18 @@ function StackCarouselList({ className, ...props }: React.ComponentProps<"div">)
 	
 
 	useEffect(() => {
-		if (!contentRef.current) 
+		if (!carouselListRef.current) 
 			return;
 		console.log("nextSlide - " + isForward + ' - '+ activeSlide);
 		console.log("prevSlide - " + isForward + ' - '+ prevSlide);
 
-		const items = contentRef.current.querySelectorAll('[data-slot="carousel-item"]');
+		const items = carouselListRef.current.children;//querySelectorAll('[data-slot="carousel-item"]');
+		console.log("items --------------------------------------"+ items.length);
 		if( null != items && items.length > 1 ) {
 			if(  items[activeSlide] instanceof HTMLElement) {
-				//const x = 0 - (activeIndex * contentRef.current.offsetWidth);
+				//const x = 0 - (activeIndex * carouselListRef.current.offsetWidth);
 				//if(isForward) {
-					const x = 0 - (contentRef.current.offsetWidth);
+					//const x = 0 - (carouselListRef.current.offsetWidth);
 					//items[activeIndex].style.transform =`translate3d(${x}px, 0, 0)`;
 					items[activeSlide].style.transform =`none`;
 					if(isForward) {
@@ -314,23 +337,23 @@ function StackCarouselList({ className, ...props }: React.ComponentProps<"div">)
     }, [activeSlide, isForward]);
 
 	useEffect(() => {
-		if (!contentRef.current) 
+		if (!carouselListRef.current) 
 		return;
 		console.log("prevSlide - " + prevSlide);
-		const items = contentRef.current.querySelectorAll('[data-slot="carousel-item"]');
+		const items = carouselListRef.current.children;//querySelectorAll('[data-slot="carousel-item"]');
 		if( null != items && items.length > 1 ) {
 			if( items[prevSlide] instanceof HTMLElement) {
 				if(isForward) {
 					if(prevSlide != 0)
 						items[prevSlide].style.zIndex =`unset`;
-					if(prevSlide == 1 && items[0] instanceof HTMLElement)
+					if(prevSlide == 1 && items[0] instanceof HTMLElement && items.length > 2)
 						items[0].style.zIndex =`unset`;
 				} else {
-					//const items = contentRef.current.querySelectorAll('[data-slot="carousel-item"]');
+					//const items = carouselListRef.current.querySelectorAll('[data-slot="carousel-item"]');
 
 					//const prevItem = items[prevSlide] as HTMLElement;
 					//if(prevItem) {
-						items[prevSlide].style.transform =`translate3d(${contentRef.current.offsetWidth}px, 0, 0)`;
+						items[prevSlide].style.transform =`translate3d(${carouselListRef.current.offsetWidth}px, 0, 0)`;
 						items[prevSlide].style.transition =`transform ${duration}ms ${easing}`;
 						// 2. Attach the listener using the native DOM event name 'transitionend'
 						items[prevSlide].addEventListener('transitionend', handleTransitionEnd);
@@ -357,14 +380,14 @@ function StackCarouselList({ className, ...props }: React.ComponentProps<"div">)
 	);
 
   	useLayoutEffect(() => {
-		if (!contentRef.current) 
-		return;
+		if (!carouselListRef.current) 
+			return;
 		
-		const items = contentRef.current.querySelectorAll('[data-slot="carousel-item"]');
+		const items = carouselListRef.current.children;//querySelectorAll('[data-slot="carousel-item"]');
 
 		// 2. Create the observer to measure the element's actual width
 		const resizeObserver = new ResizeObserver((entries) => {
-			const x = contentRef.current?.offsetWidth;
+			const x = carouselListRef.current?.offsetWidth;
 			let count = 0;
 			Array.from(items).forEach((el) => {
 				if( el instanceof HTMLElement) {
@@ -377,32 +400,42 @@ function StackCarouselList({ className, ...props }: React.ComponentProps<"div">)
 					count++;
 				}
 			});
+			console.log('The number of children changed!');
+			console.log("-----------------Children count - " + React.Children.count(children));
+			setSlidesCount(React.Children.count(children));
+			/*for (let entry of entries) {
+				console.log('Children changed size or layout! ---------------', React.Children.count(children));
+				// Your logic here (e.g., checking for text overflow or updating state)
+			  }*/
     	});
 
 		// 3. Start observing the div
-		resizeObserver.observe(contentRef.current);
+		resizeObserver.observe(carouselListRef.current);
 
 		// 4. Clean up the observer on component unmount
 		return () => {
 			resizeObserver.disconnect();
 		};
- 	}, []);
+ 	}, [React.Children.count(children)]);
   
 	return (
-		<div
-			ref={contentRef}
+		<>
+		{/*<div
+			ref={carouselListRef}
 			className="overflow-hidden"
 			data-slot="carousel-list"//carousel-content
-		>
+		>*/}
 		<div
-			className={cn(
+			ref={carouselListRef}
+			data-slot="carousel-list"//carousel-content
+			className={cn( "w-full",
 			"flex",
 			"relative",
 			className
 			)}
-			{...props}
-		/>
-		</div>
+		>{children}</div>
+		{/*</div>*/}
+		</>
 	)
 }
 
@@ -413,7 +446,7 @@ function StackCarouselItem({ className, ...props }: React.ComponentProps<"div">)
         role="group"
         aria-roledescription="slide"
         data-slot="carousel-item"
-        className={cn(
+         className={cn(
           "min-w-0 shrink-0 grow-0 basis-full ",
 		  "[&:not(:first-of-type)]:absolute [&:not(:first-of-type)]:w-full",
 		  "first:z-1",
@@ -430,7 +463,7 @@ function StackCarouselItem({ className, ...props }: React.ComponentProps<"div">)
 	size = "icon-sm",
 	...props
   }: React.ComponentProps<typeof Button>) {
-	const { scrollPrev } = useStackCarousel();
+	const { scrollPrev, count } = useStackCarousel();
   
 	return (
 	  <Button
@@ -442,7 +475,7 @@ function StackCarouselItem({ className, ...props }: React.ComponentProps<"div">)
 			"inset-y-0 -left-12 my-auto",
 		  className
 		)}
-		disabled={false}
+		disabled={count < 2}
 		onClick={scrollPrev}
 		{...props}
 	  >
@@ -458,7 +491,7 @@ function StackCarouselItem({ className, ...props }: React.ComponentProps<"div">)
 	size = "icon-sm",
 	...props
   }: React.ComponentProps<typeof Button>) {
-	const { scrollNext } = useStackCarousel();
+	const { scrollNext, count } = useStackCarousel();
   
 	return (
 	  <Button
@@ -470,7 +503,7 @@ function StackCarouselItem({ className, ...props }: React.ComponentProps<"div">)
 		   "inset-y-0 -right-12 my-auto",
 		  className
 		)}
-		disabled={false}
+		disabled={count < 2}
 		onClick={scrollNext}
 		{...props}
 	  >
@@ -491,36 +524,38 @@ function StackCarouselItem({ className, ...props }: React.ComponentProps<"div">)
 	const { count, activeSlide, scrollToSlide } = useStackCarousel();
     //const hasChildren = children !== null && children !== undefined && children !== "";
 	return (
-		<div className="flex justify-center gap-2 py-4">
-			{	dots && 
-				dots.map((dot, index) => (
-					<button
-						key={index}
-						onClick={() => scrollToSlide(index)}
-						className={`h-8 md:h-12 w-8 md:w-12 rounded-md transition-colors rounded-sm ${
-							activeSlide === index ? "opacity-100" : "opacity-50"
-						}`}
-						aria-label={`Go to slide ${index + 1}`}
-					><img
-					src={dot}
-					alt="Event cover"
-					className="relative z-20 aspect-square w-full object-cover rounded-sm "
-				/></button>
-			  ))
-			}
-			{ !dots && 
-				Array.from({ length: count }).map((_, index) => (
-					<button
-						key={index}
-						onClick={() => scrollToSlide(index)}
-						className={`h-4.5 w-4.5 rounded-full transition-colors ${
-							activeSlide === index ? "bg-primary" : "bg-transparent border"
-						}`}
-						aria-label={`Go to slide ${index + 1}`}
-					/>
-				))
-			}
-	</div>
+			<>{ count > 1 && <div className="flex justify-center gap-2 py-4">
+					{	dots && 
+						dots.map((dot, index) => (
+							<button
+								key={index}
+								onClick={() => scrollToSlide(index)}
+								className={`h-8 md:h-12 w-8 md:w-12 rounded-md transition-colors rounded-sm ${
+									activeSlide === index ? "opacity-100" : "opacity-50"
+								}`}
+								aria-label={`Go to slide ${index + 1}`}
+							><img
+							src={dot}
+							alt="Event cover"
+							className="relative z-20 aspect-square w-full object-cover rounded-sm "
+						/></button>
+					))
+					}
+					{ !dots && 
+						Array.from({ length: count }).map((_, index) => (
+							<button
+								key={index}
+								onClick={() => scrollToSlide(index)}
+								className={`h-4.5 w-4.5 rounded-full transition-colors ${
+									activeSlide === index ? "bg-primary" : "bg-transparent border"
+								}`}
+								aria-label={`Go to slide ${index + 1}`}
+							/>
+						))
+					}
+			</div>}
+		</>
+		
 	)
   }
 
