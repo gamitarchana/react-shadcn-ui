@@ -104,11 +104,11 @@ export default function CarouselPage() {
                 <Breadcrumb>
                     <BreadcrumbList>
                         <BreadcrumbItem>
-                            <BreadcrumbLink render={<Link href="/">Home</Link>} />
+                            <BreadcrumbLink render={<Link className="no-underline" href="/">Home</Link>} />
                         </BreadcrumbItem>
                         <BreadcrumbSeparator />
                         <BreadcrumbItem>
-                            <BreadcrumbLink render={<Link href="/card">Components</Link>} />
+                            <BreadcrumbLink render={<Link className="no-underline" href="/card">Components</Link>} />
                         </BreadcrumbItem>
                         <BreadcrumbSeparator />
                         <BreadcrumbItem>
