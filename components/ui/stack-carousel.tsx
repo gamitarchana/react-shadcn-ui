@@ -559,8 +559,8 @@ function StackCarouselItem({ className, ...props }: React.ComponentProps<"div">)
 	)
   }
 
+export default StackCarousel
 export {
-  StackCarousel,
   StackCarouselContent,
   StackCarouselList,
   StackCarouselItem,

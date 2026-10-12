@@ -16,15 +16,16 @@ import Autoplay from "embla-carousel-autoplay"
 import Fade from "embla-carousel-fade"
 import { Heading } from "@/components/ui/heading"
 
-import { 
-    StackCarousel,
-    StackCarouselContent,
-    StackCarouselList,
-    StackCarouselItem,
-    StackCarouselNext,
-    StackCarouselPrevious,
-    StackCarouselDots
-} from "@/components/ui/stack-carousel"
+import  
+    StackCarousel, 
+    {
+        StackCarouselContent,
+        StackCarouselList,
+        StackCarouselItem,
+        StackCarouselNext,
+        StackCarouselPrevious,
+        StackCarouselDots
+    } from "@/components/ui/stack-carousel"
 
 import {
     Breadcrumb,
@@ -315,7 +316,7 @@ export default function CarouselPage() {
                             <StackCarousel className="w-full" autoPlay={true} delay={5000} duration={2000}>
                                 <StackCarouselContent>
                                     <StackCarouselList>
-                                        {Array.from({ length: 5 }).map((_, index) => (
+                                        {Array.from({ length: 2 }).map((_, index) => (
                                         <StackCarouselItem key={index} className="bg-primary odd:bg-gray-100">
                                             <div className="p-1">
                                             <Card className="p-0">
