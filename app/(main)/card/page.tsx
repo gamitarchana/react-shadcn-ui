@@ -48,15 +48,14 @@ export default function CardPage() {
   }
 
   return (
-    <div className="flex min-h-svh p-6">
-        <div className="flex min-w-0 flex-col gap-4 text-sm leading-loose">
+    <div className="flex min-w-0 flex-col gap-4 text-sm leading-loose">
             <h1 className="scroll-m-20 text-4xl tracking-tight lg:text-5xl font-heading">Cards</h1>
             <div>
-              <div className="py-8">  
+              <div className="pb-8">  
                 <h2 className="scroll-m-20 text-3xl tracking-tight lg:text-4xl font-heading">Cards - Default Shadcn Componet, Custom styling</h2> 
                 <div className="py-4"> 
-                  <div className="flex flex-wrap -m-4 xl: -m-5">
-                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                  <div className="flex flex-wrap -m-4 overflow-hidden">
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
                       <Card className="relative pt-0">
                         <div className="absolute inset-0 z-30 aspect-video bg-black/35 " />
                         <img
@@ -79,7 +78,7 @@ export default function CardPage() {
                         </CardFooter>
                       </Card>
                     </div>
-                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
                                 <Card className="relative pt-0">
                                   <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
                                   <img
@@ -102,7 +101,7 @@ export default function CardPage() {
                                   </CardFooter>
                                 </Card>
                               </div>
-                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
                                 <Card className="relative pt-0">
                                   <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
                                   <img
@@ -125,7 +124,7 @@ export default function CardPage() {
                                   </CardFooter>
                                 </Card>
                               </div>
-                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
                                 <Card className="relative pt-0">
                                   <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
                                   <img
@@ -148,7 +147,7 @@ export default function CardPage() {
                                   </CardFooter>
                                 </Card>
                               </div>
-                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
                       <Card className="relative pt-0">
                         <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
                         <img
@@ -177,8 +176,8 @@ export default function CardPage() {
 			        <div className="py-8">  
                 <h2 className="scroll-m-20 text-3xl tracking-tight lg:text-4xl font-heading">My Cards - Custom - BUTTON, LINK</h2> 
                 <div className="py-4"> 
-                  <div className="flex flex-wrap -m-4 xl: -m-5">
-                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                  <div className="flex flex-wrap -m-4 overflow-hidden">
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
                       <MyCard className="relative pt-0 border-0" onClick={myCardClikHandler}>
                         <div className="absolute inset-0 z-30 aspect-video bg-black/35 rounded-lg" />
                         <img
@@ -193,7 +192,7 @@ export default function CardPage() {
                         </MyCardFooter>
                       </MyCard>
                     </div>
-					          <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+					          <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
                       <MyCard className="relative pt-0">
                         <div className="absolute inset-0 z-30 aspect-video bg-black/35 rounded-lg" />
                         <img
@@ -208,7 +207,7 @@ export default function CardPage() {
                         </MyCardFooter>
                       </MyCard>
                     </div>
-					          <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+					          <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
                       <MyCard className="relative pt-0">
                         <div className="absolute inset-0 z-30 aspect-video bg-black/35 rounded-lg" />
                         <img
@@ -223,7 +222,7 @@ export default function CardPage() {
                         </MyCardFooter>
                       </MyCard>
                     </div>
-					          <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+					          <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
                       <MyCard className="relative pt-0">
                         <div className="absolute inset-0 z-30 aspect-video bg-black/35 rounded-lg" />
                         <img
@@ -238,7 +237,7 @@ export default function CardPage() {
                         </MyCardFooter>
                       </MyCard>
                     </div>
-					          <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+					          <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
                       <MyCard className="relative pt-0" as={Link} href="\dashboard">
                         <div className="absolute inset-0 z-30 aspect-video bg-black/35 rounded-lg" />
                         <img
@@ -259,8 +258,8 @@ export default function CardPage() {
               <div className="py-8">  
                 <h2 className="scroll-m-20 text-3xl tracking-tight lg:text-4xl font-heading">Vd Cards - Custom - DIV, BUTTON, LINK</h2> 
                 <div className="py-4"> 
-                  <div className="flex flex-wrap -m-4 xl: -m-5">
-                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                  <div className="flex flex-wrap -m-4 overflow-hidden">
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
                       <VdCard className="relative pt-0">
                         <div className="absolute inset-0 z-30 aspect-square md:aspect-video bg-black/35 " />
                         <img
@@ -282,7 +281,7 @@ export default function CardPage() {
                         </VdCardFooter>
                       </VdCard>
                     </div>
-                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
                       <VdCard as="button" className="relative pt-0">
                         <div className="absolute inset-0 z-30 aspect-square md:aspect-[4/3] bg-black/35 " />
                         <img
@@ -304,7 +303,7 @@ export default function CardPage() {
                         </VdCardFooter>
                       </VdCard>
                     </div>
-                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
                       <VdCard as={Link} href="/dashboard" className="relative pt-0">
                         <div className="absolute inset-0 z-30 aspect-square md:aspect-[12/5] bg-black/35 " />
                         <img
@@ -326,7 +325,7 @@ export default function CardPage() {
                         </VdCardFooter>
                       </VdCard>
                     </div>
-                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
                       <VdCard className="relative pt-0">
                         <div className="absolute inset-0 z-30 aspect-square md:aspect-video bg-black/35 " />
                         <img
@@ -349,7 +348,7 @@ export default function CardPage() {
                         </VdCardFooter>
                       </VdCard>
                     </div>
-                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
                       <VdCard className="relative pt-0">
                         <div className="absolute inset-0 z-30 aspect-square md:aspect-video bg-black/35 " />
                         <img
@@ -372,7 +371,7 @@ export default function CardPage() {
                         </VdCardFooter>
                       </VdCard>
                     </div>
-                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
                       <VdCard className="relative pt-0">
                         <div className="absolute inset-0 z-30 aspect-square md:aspect-video bg-black/35 " />
                         <img
@@ -395,7 +394,7 @@ export default function CardPage() {
                         </VdCardFooter>
                       </VdCard>
                     </div>
-                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
                       <VdCard className="relative pt-0">
                         <div className="absolute inset-0 z-30 aspect-square md:aspect-video bg-black/35 " />
                         <img
@@ -418,7 +417,7 @@ export default function CardPage() {
                         </VdCardFooter>
                       </VdCard>
                     </div>
-                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
                       <VdCard className="relative pt-0">
                         <div className="absolute inset-0 z-30 aspect-square md:aspect-video bg-black/35 " />
                         <img
@@ -441,7 +440,7 @@ export default function CardPage() {
                         </VdCardFooter>
                       </VdCard>
                     </div>
-                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
                       <VdCard className="relative pt-0">
                         <div className="absolute inset-0 z-30 aspect-square md:aspect-video bg-black/35 " />
                         <img
@@ -460,7 +459,7 @@ export default function CardPage() {
                         </VdCardFooter>
                       </VdCard>
                     </div>
-                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4 xl: p-5">
+                    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
                       <VdCard className="relative pt-0">
                         <div className="absolute inset-0 z-30 aspect-square md:aspect-video bg-black/35 " />
                         <img
@@ -511,6 +510,6 @@ export default function CardPage() {
                 </Pagination>
             </div>
         </div>
-    </div>
+
   )
 }
