@@ -11,7 +11,7 @@ export default function MainLayout({
   return (
 
         <>
-          <SidebarBannerLayout>{children}</SidebarBannerLayout>
+          <SidebarLayout>{children}</SidebarLayout>
         </>
  
   )

@@ -343,5 +343,9 @@
 label { margin-right: 10px; }
 
 .vd-main-container {
-  @apply w-full min-h-svh 2xl:max-w-7xl mx-auto px-4 2xl:px-0 py-6
+  @apply w-full min-h-svh 2xl:max-w-7xl mx-auto px-4 2xl:px-0
+}
+
+.vd-content-entry {
+  @apply pt-16 pb-20
 }
